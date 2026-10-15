@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galeria | Exemple MVC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navigation" aria-label="Navegació principal">
+      <a class="brand" href="index.html">Galeria</a>
+      <ul>
+        <li><a href="index.html" aria-current="page">Portada</a></li>
+        <li><a href="login.html">Canvi d'usuari</a></li>
+        <li><a href="about.html">Sobre la web</a></li>
+        <li><a href="exemple.html">Exemple</a></li>
+        <li><a href="error.html">Exemple d'error</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-heading">Galeria d'imatges</h1>
+    <p class="intro">Exemple de galeria amb MVC i middleware.</p>
+    <p class="notice">Hola, Rasmus Lerdorf! Ja has visitat 3 pàgines d'aquesta web.</p>
+
+    <section class="gallery-layout" aria-label="Galeria">
+      <nav class="image-list" aria-label="Selecciona una imatge">
+        <a href="#calella">Calella</a>
+        <a href="#nova-york" aria-current="true">Nova York</a>
+        <a href="#platja">La platja</a>
+        <a href="#llac">El llac</a>
+        <a href="#figueres">Figueres</a>
+        <a href="#via-lactia">Via Làctia</a>
+      </nav>
+      <div>
+        <img class="featured-image" src="img/ny.jpg" alt="Vista de Nova York">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-card">
+      <h2>M613 · Desenvolupament web entorn servidor</h2>
+      <p>Professor: Dani Prados</p>
+      <p>Exemple de galeria amb MVC</p>
+    </div>
+  </footer>
+</body>
+</html>

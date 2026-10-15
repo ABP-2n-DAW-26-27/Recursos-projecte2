@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Identificació | Exemple MVC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navigation" aria-label="Navegació principal">
+      <a class="brand" href="index.html">Galeria</a>
+      <ul>
+        <li><a href="index.html">Portada</a></li>
+        <li><a href="login.html" aria-current="page">Canvi d'usuari</a></li>
+        <li><a href="about.html">Sobre la web</a></li>
+        <li><a href="exemple.html">Exemple</a></li>
+        <li><a href="error.html">Exemple d'error</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-heading">Identifica't per entrar</h1>
+    <p class="intro">Et donem la benvinguda a la galeria.</p>
+    <section class="card form-card">
+      <h2>Exemple · Sessions</h2>
+      <p>Abans d'entrar, què et sembla si em dius el teu nom?</p>
+      <form action="#" method="post">
+        <label for="name">Nom</label>
+        <input id="name" name="name" type="text" placeholder="El teu nom">
+        <label for="surname">Cognom</label>
+        <input id="surname" name="surname" type="text" placeholder="El teu cognom">
+        <button type="submit">Hola!</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-card"><h2>M613 · Desenvolupament web entorn servidor</h2><p>Professor: Dani Prados</p><p>Exemple de galeria amb MVC</p></div></footer>
+</body>
+</html>
