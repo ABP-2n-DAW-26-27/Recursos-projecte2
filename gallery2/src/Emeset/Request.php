@@ -1,0 +1,124 @@
+<?php
+
+/**
+ * Exemple per a M07.
+ *
+ * @author: Dani Prados dprados@cendrassos.net
+ *
+ * Classe gestiona la petició HTTP.
+ **/
+
+namespace Emeset;
+
+/**
+ * Request: Classe gestiona la petició HTTP.
+ *
+ * @author: Dani Prados dprados@cendrassos.net
+ *
+ * Encapsula la petició HTTP per permetre llegir-la com una entrada.
+ **/
+class Request
+{
+
+    /**
+     * __construct:  Crear el petició http
+     **/
+    public function __construct()
+    {
+        session_start();
+    }
+
+    /**
+     * get:  obté un valor de l'entrada especificada amb el filtre indicat
+     *
+     * @param $input   string identificador de l'entrada.
+     * @param $id      string amb la tasca.
+     * @param $filter  int filtre a aplicar
+     * @param $options int opcions del filtre si volem un array FILTER_REQUIRE_ARRAY
+     **/
+    public function get(int|string $input, string $id, int|string $filter = "FILTER_SANITIZE_STRING", int|array $options = 0): mixed
+    {
+        $result = false;
+        if ($input === 'SESSION') {
+            $result = null;
+            if (isset($_SESSION[$id])) {
+                $result = $_SESSION[$id];
+            }
+        } elseif ($input === 'FILES') {
+            $result = null;
+            if (isset($_FILES[$id])) {
+                $result = $_FILES[$id];
+            }
+        } elseif ($input === "INPUT_REQUEST") {
+            $result = null;
+            if (isset($_REQUEST[$id])) {
+                $var = $_REQUEST[$id];
+                if ($filter == "FILTER_SANITIZE_STRING") {
+                    $result = filter_var($var, FILTER_DEFAULT, $options);
+                    if (isset($result)) {
+                        $result = htmlspecialchars($result, ENT_QUOTES, 'UTF-8');
+                    }
+                } else {
+                    $result = filter_var($var, $filter, $options);
+                }
+            }
+        } else {
+            if ($filter == "FILTER_SANITIZE_STRING") {
+                $result = filter_input($input, $id, FILTER_DEFAULT, $options);
+                if (isset($result)) {
+                    $result = htmlspecialchars($result, ENT_QUOTES, 'UTF-8');
+                }
+            } else {
+                $result = filter_input($input, $id, $filter, $options);
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * getRaw:  obté un valor de l'entrada especificada sense filtrar
+     *
+     * @param $input   string identificador de l'entrada.
+     * @param $id      string amb la tasca.
+     * @param $options int opcions del filtre si volem un array FILTER_REQUIRE_ARRAY
+     **/
+    public function getRaw(int|string $input, string $id, int|array $options = 0): mixed
+    {
+        return $this->get($input, $id, FILTER_UNSAFE_RAW, $options);
+    }
+
+    /**
+     * get:  retorna true si l'entrada especificada existeix i false si no.
+     *
+     * @param $input   string identificador de l'entrada.
+     * @param $id      string amb la tasca.
+     * return boolean
+     **/
+    public function has(int|string $input, string $id): bool
+    {
+        $result = false;
+        if ($input === 'SESSION') {
+            $result = isset($_SESSION[$id]);
+        } elseif ($input === 'FILES') {
+            $result = isset($_FILES[$id]);
+        } elseif ($input === "INPUT_REQUEST") {
+            $result = isset($_REQUEST[$id]);
+        } else {
+            $result = !is_null(filter_input($input, $id, FILTER_UNSAFE_RAW));
+        }
+        return $result;
+    }
+
+    /**
+     * isAjax:  retorna true si la petició és AJAX i false si no.
+     *
+     * return boolean
+     * 
+     * Mateo Cerna
+     **/
+    public function isAjax(): bool
+    {
+        //Comprovem si la petició és AJAX mirant la capçalera HTTP_X_REQUESTED_WITH i si el seu valor és xmlhttprequest
+        return !empty($this->has(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH')) && strtolower($this->get(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH')) == 'xmlhttprequest';
+    }
+}
