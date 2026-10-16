@@ -196,6 +196,76 @@ input {
   font: inherit;
 }
 
+textarea,
+select {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #9eafaa;
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+input[type="file"] {
+  padding: 0.5rem;
+}
+
+.actions,
+.inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.actions { margin: 1rem 0; }
+.inline-actions { gap: 0.4rem; }
+
+.button,
+button {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-radius: 4px;
+  background: #176b63;
+  color: #fff;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.actions .button,
+.inline-actions .button,
+.inline-actions button { margin-top: 0; }
+
+.button:hover,
+button:hover { background: #104f49; }
+
+.button-secondary { background: #e7f0ed; color: #174f49; }
+.button-secondary:hover { background: #d5e7e1; }
+.button-danger { background: #a53838; }
+.button-danger:hover { background: #7c2929; }
+
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; background: #fff; }
+.data-table th,
+.data-table td { padding: 0.75rem; border-bottom: 1px solid #e1e8e5; text-align: left; vertical-align: middle; }
+.data-table th { color: #173d3a; background: #edf3f0; }
+.table-image { display: block; width: 88px; height: 62px; border-radius: 5px; object-fit: cover; }
+.muted { color: #65736f; }
+.detail-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(230px, 0.8fr); gap: 1.5rem; align-items: start; }
+.detail-image { display: block; width: 100%; max-height: 560px; border-radius: 8px; object-fit: cover; }
+.preview-image { display: block; width: min(100%, 320px); max-height: 220px; margin-top: 0.75rem; border-radius: 6px; object-fit: cover; }
+.confirm-card { max-width: 620px; margin: 2rem auto; }
+.check-row { display: flex; align-items: flex-start; gap: 0.6rem; margin-top: 1rem; }
+.check-row input { width: auto; margin-top: 0.35rem; }
+
 button {
   margin-top: 1.25rem;
   padding: 0.7rem 1rem;
@@ -244,6 +314,8 @@ button:hover {
   .gallery-layout {
     grid-template-columns: 1fr;
   }
+
+  .detail-layout { grid-template-columns: 1fr; }
 
   .image-list {
     display: grid;
