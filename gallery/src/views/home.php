@@ -16,11 +16,11 @@
     <section class="gallery-layout" aria-label="Galeria">
       <nav class="image-list" aria-label="Selecciona una imatge">
         <?php foreach($images as $key => $image) { ?>
-        <a href="index.php?image=<?= $key ?>"><?= $image["title"] ?></a>
+        <a href="index.php?image=<?= $image["id"] ?>"><?= $image["title"] ?></a>
         <?php } ?>
       </nav>
       <div>
-        <img class="featured-image" src="img/<?= $images[$currentImage]["url"] ?>" alt="<?= $images[$currentImage]["title"] ?>">
+        <img class="featured-image" src="img/<?= $currentImage["url"] ?>" alt="<?= $currentImage["title"] ?>">
       </div>
     </section>
   </main>
