@@ -1,5 +1,7 @@
 <?php
 
+namespace Models;
+
 /**
  * Exemple per a M613.
  * @author: Dani Prados dprados@cendrassos.net
@@ -8,52 +10,70 @@
  *
  **/
 
-
 /**
  * Imatges
  */
 class Images
 {
-    //    private array $images = [
-    //         ["title" => "Via lactea ", "url" => "via-lactea.jpg"],
-    //         ["title" => "Figueres", "url" => "figueres.jpg"],
-    //         ["title" => "Calella", "url" => "calella.jpg"],
-    //         ["title" => "Nova York", "url" => "ny.jpg"],
-    //         ["title" => "Fraser Island", "url" => "platja.jpg"],
-    //         ["title" => "Lake Moraine", "url" => "llac.jpg"],
-    //     ];
+    public \PDO $sql;
 
-    public PDO $sql;
-
-    public function __construct($dsn, $user, $password)
+    public function __construct(Db $db)
     {
-        try {
-            $this->sql = new PDO($dsn, $user, $password);
-        } catch (PDOException $e) {
-            print_r($e);
-            die();
-        }
+        $this->sql = $db->getDb();
     }
 
     public function get(): array
     {
         $query = 'select id, url, title from images';
         $result = [];
-        foreach ($this->sql->query($query, PDO::FETCH_ASSOC) as $link) {
+        foreach ($this->sql->query($query, \PDO::FETCH_ASSOC) as $link) {
             $result[] = $link;
         }
         return $result;
         //    return $this->images;
     }
 
-    public function getById($id) : array | bool
+    public function getById(int $id) : array | bool
     {
         $query = 'select id, url, title from images where id = :id';
         $stm = $this->sql->prepare($query);
         $stm->execute([':id' => $id]);
         
-        $image = $stm->fetch(PDO::FETCH_ASSOC);
+        $image = $stm->fetch(\PDO::FETCH_ASSOC);
 
         return $image;
+    }
+
+    public function add(string $url, string $title, string $description = ''): bool
+    {
+        $stm = $this->sql->prepare('insert into images (url, title, description) values (:url, :title, :description);');
+        $result = false;
+        try {
+            $result = $stm->execute([
+                ':url'   => $url,
+                ':title'  => $title,
+                ':description' => $description,
+            ]);
+        } catch (\PDOException $e) {
+            // Aquí podem gestionar els errors
+        }
+        return $result;
+    }
+
+    public function update(int $id, string $url, string $title, string $description = ''): bool
+    {
+        $stm = $this->sql->prepare('update images set url = :url, title = :title, description = :description where id = :id;');
+        $result = false;
+        try {
+            $result = $stm->execute([
+                ':id'    => $id,
+                ':url'   => $url,
+                ':title'  => $title,
+                ':description' => $description,
+            ]);
+        } catch (\PDOException $e) {
+            // Aquí podem gestionar els errors
+        }
+        return $result;
     }
 }

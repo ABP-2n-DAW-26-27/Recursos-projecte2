@@ -11,18 +11,27 @@
   <main class="container">
     <h1 class="page-heading">Gestiona la galeria</h1>
     <p class="intro">Consulta les imatges, edita'n les dades o afegeix-ne de noves.</p>
-    <p class="notice">Hi ha 6 imatges a la galeria.</p>
+    <?php if(isset($success) && $success !== ''){?><p class="notice"><?= $success ?></p><?php } ?>
     <div class="actions"><a class="button" href="index.php?r=image-new">Afegeix una imatge</a></div>
     <section class="content-panel" aria-label="Llistat d'imatges">
       <div class="table-wrap"><table class="data-table">
         <thead><tr><th scope="col">Imatge</th><th scope="col">Títol</th><th scope="col">Fitxer</th><th scope="col">Accions</th></tr></thead>
         <tbody>
-          <tr><td><img class="table-image" src="img/calella.jpg" alt="Calella"></td><td>Calella</td><td>calella.jpg</td><td><div class="inline-actions"><a class="button button-secondary" href="index.php">Veure</a><a class="button button-secondary" href="index.php?r=image-edit">Edita</a><a class="button button-danger" href="index.php?r=image-delete">Elimina</a></div></td></tr>
-          <tr><td><img class="table-image" src="img/ny.jpg" alt="Nova York"></td><td>Nova York</td><td>ny.jpg</td><td><div class="inline-actions"><a class="button button-secondary" href="index.php">Veure</a><a class="button button-secondary" href="index.php?r=image-edit">Edita</a><a class="button button-danger" href="index.php?r=image-delete">Elimina</a></div></td></tr>
-          <tr><td><img class="table-image" src="img/platja.jpg" alt="La platja"></td><td>La platja</td><td>platja.jpg</td><td><div class="inline-actions"><a class="button button-secondary" href="index.php">Veure</a><a class="button button-secondary" href="index.php?r=image-edit">Edita</a><a class="button button-danger" href="index.php?r=image-delete">Elimina</a></div></td></tr>
-          <tr><td><img class="table-image" src="img/llac.jpg" alt="El llac"></td><td>El llac</td><td>llac.jpg</td><td><div class="inline-actions"><a class="button button-secondary" href="index.php">Veure</a><a class="button button-secondary" href="index.php?r=image-edit">Edita</a><a class="button button-danger" href="index.php?r=image-delete">Elimina</a></div></td></tr>
-          <tr><td><img class="table-image" src="img/figueres.jpg" alt="Figueres"></td><td>Figueres</td><td>figueres.jpg</td><td><div class="inline-actions"><a class="button button-secondary" href="index.php">Veure</a><a class="button button-secondary" href="index.php?r=image-edit">Edita</a><a class="button button-danger" href="index.php?r=image-delete">Elimina</a></div></td></tr>
-          <tr><td><img class="table-image" src="img/via-lactea.jpg" alt="Via Làctia"></td><td>Via Làctia</td><td>via-lactea.jpg</td><td><div class="inline-actions"><a class="button button-secondary" href="index.php">Veure</a><a class="button button-secondary" href="index.php?r=image-edit">Edita</a><a class="button button-danger" href="index.php?r=image-delete">Elimina</a></div></td></tr>
+          <?php foreach($images as $key => $image) { ?>
+          <tr>
+            <td><img class="table-image" src="img/<?= $image["url"] ?>" alt="<?= $image["title"] ?>"></td>
+            <td><?= $image["title"] ?></td>
+            <td><?= $image["url"] ?></td>
+            <td>
+              <div class="inline-actions">
+                <a class="button button-secondary" href="index.php?image=<?= $image["id"] ?>">Veure</a>
+                <a class="button button-secondary" href="index.php?r=image-edit&amp;id=<?= $image["id"] ?>">Edita</a>
+                <a class="button button-danger" href="index.php?r=image-delete&amp;id=<?= $image["id"] ?>">Elimina</a>
+              </div>
+            </td>
+          </tr>
+          
+          <?php } ?>
         </tbody>
       </table></div>
     </section>

@@ -17,7 +17,8 @@
  include "../src/controllers/ctrlImageUpdate.php";
 
  /* models */
- include "../src/models/images.php";
+ include "../src/Models/Db.php";
+ include "../src/Models/Images.php";
 
 
 /**
@@ -27,10 +28,11 @@
  include "../src/Emeset/Container.php";
  include "../src/Emeset/Request.php";
  include "../src/Emeset/Response.php";
+ include "../src/Container.php";
 
  $request = new \Emeset\Request();
  $response = new \Emeset\Response();
- $container = new \Emeset\Container($config);
+ $container = new Container($config);
 
  /* 
   * Aquesta és la part que fa que funcioni el Front Controller.
@@ -39,7 +41,7 @@
   * Si no existeix la pàgina, carreguem la pàgina d'error.
   */
  $r = $request->get("INPUT_REQUEST", "r") ?? '';
- 
+  
  /* Front Controller, aquí es decideix quina acció s'executa */
  if($r == "do-login") {
      $response = ctrlDoLogin($request, $response, $container);

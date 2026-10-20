@@ -1,18 +1,10 @@
 <?php
 
- include "../src/Models/Images.php";
+function ctrlIndex(\Emeset\Request $request, \Emeset\Response $response, Container $container): \Emeset\Response{
 
-function ctrlIndex(\Emeset\Request $request, \Emeset\Response $response, \Emeset\Container $container): \Emeset\Response{
-    
-    $dsn = 'mysql:dbname=gallery;host=127.0.0.1;port=3306;charset=utf8mb4';
-    $user = 'gallery';
-    $password = '1234';
-
-    $imagesModel = new Images($dsn, $user, $password);
+    $imagesModel = $container->Images();
     
     $images = $imagesModel->get();
-
-    //print_r($images);
 
     $name = $request->get("SESSION", "name") ?? "No name";
     $surname = $request->get("SESSION", "surname") ?? "No surname";

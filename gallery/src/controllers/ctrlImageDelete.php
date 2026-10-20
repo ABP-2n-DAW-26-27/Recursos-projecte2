@@ -1,6 +1,6 @@
 <?php
 
-function ctrlImageDelete(\Emeset\Request $request, \Emeset\Response $response, \Emeset\Container $container): \Emeset\Response{
+function ctrlImageDelete(\Emeset\Request $request, \Emeset\Response $response, \Container $container): \Emeset\Response{
 
     return $response;
 }
