@@ -7,6 +7,7 @@ class Container extends \Emeset\Container {
     public function __construct($config)
     {
         parent::__construct($config);
+        echo "Creant connexió a la base de dades amb: " . $this->config["db"]["user"] . "@" . $this->config["db"]["host"] . ":" . $this->config["db"]["port"] . "/" . $this->config["db"]["dbname"] . "\n";
         $this->db = $this->Db();
     }
 

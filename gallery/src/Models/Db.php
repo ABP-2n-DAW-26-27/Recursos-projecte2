@@ -12,6 +12,7 @@ class Db {
         try {
             $this->db = new \PDO($dsn, $user, $password);
         } catch (\PDOException $e) {
+            echo $dsn;
             die('Ha fallat la connexió: ' . $e->getMessage());
         }
     }
