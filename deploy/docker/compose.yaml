@@ -1,0 +1,45 @@
+services:
+  web:
+    image: ${APP_IMAGE:-p02-gallery:1.0}
+    ports:
+      - "127.0.0.1:8080:80" # Limita l'accés a localhost per seguretat. Sinó treure la part de la IP.
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: ${MYSQL_DATABASE:-gallery}
+      DB_USER: ${MYSQL_USER:-gallery_app}
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Defineix MYSQL_PASSWORD al fitxer .env}
+    volumes:
+      # Desa les imatges pujades i conserva les imatges inicials del directori.
+      - gallery_uploads:/var/www/html/img
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - interna
+
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-gallery}
+      MYSQL_USER: ${MYSQL_USER:-gallery_app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Defineix MYSQL_PASSWORD al fitxer .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defineix MYSQL_ROOT_PASSWORD al fitxer .env}
+    volumes:
+      - gallery_db_data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d:ro # Carrega els scripts d'inicialització de la base de dades.Només read-only
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - interna
+
+networks:
+  interna:
+    internal: true
+
+volumes:
+  gallery_db_data:
+  gallery_uploads:
