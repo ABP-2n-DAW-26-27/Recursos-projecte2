@@ -76,4 +76,11 @@ class Images
         }
         return $result;
     }
+
+    public function delete(int $id) : void
+    {
+        $query = 'delete from images where id = :id';
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':id' => $id]);        
+    }
 }
