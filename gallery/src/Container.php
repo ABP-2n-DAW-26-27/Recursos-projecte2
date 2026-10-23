@@ -16,6 +16,11 @@ class Container extends \Emeset\Container {
         return new \Models\Images($this->db);
     }
 
+    public function Users() : \Models\Users
+    {
+        return new \Models\Users($this->db);
+    }
+
     public function Db() : \Models\Db
     {
         return new \Models\Db(

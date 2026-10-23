@@ -19,6 +19,10 @@
  /* models */
  include "../src/Models/Db.php";
  include "../src/Models/Images.php";
+ include "../src/Models/User.php";
+
+ /* middlewares */
+ include "../src/middleware/auth.php";
 
 
 /**
@@ -48,17 +52,17 @@
  } elseif($r == "login") {
      $response = ctrlLogin($request, $response, $container);
  } else if($r == "gallery-admin") {
-     $response = ctrlGalleryAdmin($request, $response, $container);
+     $response = auth($request, $response, $container, "ctrlGalleryAdmin");
  } else if($r == "image-new") {
-     $response = ctrlImageNew($request, $response, $container);
+     $response = auth($request, $response, $container, "ctrlImageNew");
  } else if($r == "image-edit") {
-     $response = ctrlImageEdit($request, $response, $container);
+     $response = auth($request, $response, $container, "ctrlImageEdit");
  } else if($r == "image-delete") {
-     $response = ctrlImageDelete($request, $response, $container);
+     $response = auth($request, $response, $container, "ctrlImageDelete");
  } else if($r == "image-store") {
-     $response = ctrlImageStore($request, $response, $container);
+     $response = auth($request, $response, $container, "ctrlImageStore");
  } else if($r == "image-update") {
-     $response = ctrlImageUpdate($request, $response, $container);
+     $response = auth($request, $response, $container, "ctrlImageUpdate");
  }  else if($r == "about") {
      $response = ctrlAbout($request, $response, $container);
  }  else if($r == "") {

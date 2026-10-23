@@ -17,11 +17,11 @@
       <p>Abans d'entrar, què et sembla si em dius el teu nom?</p>
       <form action="index.php" method="post">
         <input type="hidden" name="r" value="do-login">
-        <label for="name">Nom</label>
-        <input id="name" name="name" type="text" placeholder="El teu nom">
-        <label for="surname">Cognom</label>
-        <input id="surname" name="surname" type="text" placeholder="El teu cognom">
-        <button type="submit">Hola!</button>
+        <label for="user">Usuari</label>
+        <input id="name" name="user" type="text" placeholder="El teu usuari">
+        <label for="password">Clau</label>
+        <input id="password" name="password" type="password">
+        <button type="submit">Iniciar sessió</button>
       </form>
     </section>
   </main>
