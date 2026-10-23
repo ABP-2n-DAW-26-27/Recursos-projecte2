@@ -14,6 +14,7 @@
     <p class="intro">Et donem la benvinguda a la galeria.</p>
     <section class="card form-card">
       <h2>Exemple · Sessions</h2>
+      <?php if(isset($error) && $error !== ''){?><p class="notice"><?= $error ?></p><?php } ?>
       <p>Abans d'entrar, què et sembla si em dius el teu nom?</p>
       <form action="index.php" method="post">
         <input type="hidden" name="r" value="do-login">
