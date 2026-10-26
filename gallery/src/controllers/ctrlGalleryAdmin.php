@@ -10,11 +10,12 @@ function ctrlGalleryAdmin(\Emeset\Request $request, \Emeset\Response $response, 
     $response->unsetSession("error");  
     $response->unsetSession("success");
     $response->set("error", $error);
-    $response->set("success", $success);  
+    $response->set("success", $success); 
 
     /* Obtenim el llistat d'imatges*/
     $images = $imagesModel->get();
     $response->set("images", $images);
+
 
     /* Definim la vista */
     $response->setTemplate("gallery-admin.php");

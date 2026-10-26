@@ -22,6 +22,9 @@ function ctrlImageStore(\Emeset\Request $request, \Emeset\Response $response, \C
         $response->setSession("success", "Fitxer afegit amb èxit");
         $response->redirect("Location: index.php?r=gallery-admin");        
     } else {
+        $form["title"] = $title;
+        $form["description"] = $description;
+        $response->setSession("form", $form); 
         $response->setSession("error",  "Tipus de fitxer no vàlid");
         $response->redirect("Location: index.php?r=image-new");
     }

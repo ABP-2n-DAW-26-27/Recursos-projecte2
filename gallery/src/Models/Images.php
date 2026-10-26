@@ -35,7 +35,7 @@ class Images
 
     public function getById(int $id) : array | bool
     {
-        $query = 'select id, url, title from images where id = :id';
+        $query = 'select id, url, title, description from images where id = :id';
         $stm = $this->sql->prepare($query);
         $stm->execute([':id' => $id]);
         
@@ -77,10 +77,10 @@ class Images
         return $result;
     }
 
-    public function delete(int $id) : void
+    public function delete(int $id) : bool
     {
         $query = 'delete from images where id = :id';
         $stm = $this->sql->prepare($query);
-        $stm->execute([':id' => $id]);        
+        return $stm->execute([':id' => $id]) && $stm->rowCount() > 0;
     }
 }

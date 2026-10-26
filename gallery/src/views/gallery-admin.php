@@ -11,6 +11,7 @@
   <main class="container">
     <h1 class="page-heading">Gestiona la galeria</h1>
     <p class="intro">Consulta les imatges, edita'n les dades o afegeix-ne de noves.</p>
+    <?php if(isset($error) && $error !== ''){?><p class="notice"><?= $error ?></p><?php } ?>
     <?php if(isset($success) && $success !== ''){?><p class="notice"><?= $success ?></p><?php } ?>
     <div class="actions"><a class="button" href="index.php?r=image-new">Afegeix una imatge</a></div>
     <section class="content-panel" aria-label="Llistat d'imatges">

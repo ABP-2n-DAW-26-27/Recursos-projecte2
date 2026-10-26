@@ -17,8 +17,8 @@
     <section class="card form-card">
       <h2>Nova imatge</h2>
       <form action="index.php?r=image-store" method="post" enctype="multipart/form-data">
-        <label for="title">Títol</label><input id="title" name="title" type="text" placeholder="Ex.: Calella" required>
-        <label for="description">Descripció</label><textarea id="description" name="description" placeholder="Descriu breument la imatge"></textarea>
+        <label for="title">Títol</label><input id="title" name="title" type="text" placeholder="Ex.: Calella" value="<?= $form["title"] ?>" required>
+        <label for="description">Descripció</label><textarea id="description" name="description" placeholder="Descriu breument la imatge"><?= $form["description"] ?></textarea>
         <label for="image">Fitxer d'imatge</label><input id="image" name="image" type="file" accept="image/*" required>
         <div class="actions"><button type="submit">Desa la imatge</button><a class="button button-secondary" href="index.php?r=gallery-admin">Cancel·la</a></div>
       </form>

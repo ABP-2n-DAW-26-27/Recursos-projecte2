@@ -2,11 +2,11 @@
 
 function ctrlImageNew(\Emeset\Request $request, \Emeset\Response $response, \Container $container): \Emeset\Response{
 
-$user = $request->get("SESSION", "user");
-    if(is_null($user)){
-        $response->redirect("Location: index.php?r=login");
-        return $response;
-    }
+     
+    $form = $request->get("SESSION", "form") ?? [ "title" => "", "description" => ""]; 
+    $response->set("form", $form);
+    $response->unsetSession("form");
+
     $error = $request->get("SESSION", "error") ?? "";
     $response->unsetSession("error");  
 

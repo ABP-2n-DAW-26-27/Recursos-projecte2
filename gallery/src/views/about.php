@@ -12,7 +12,7 @@
   <main class="container">
   
   <h1 class="page-heading">Sobre aquest exemple</h1>
-    <p class="notice">Hola, <?= $name ?> <?= $surname ?>! Ja has visitat 3 imatges de la galeria.</p>
+    
     <section class="content-panel">
       <h2>Una galeria amb MVC</h2>
       <p>Aquest exemple utilitza un MVC bàsic i sessions i cookies per guardar informació temporal.</p>

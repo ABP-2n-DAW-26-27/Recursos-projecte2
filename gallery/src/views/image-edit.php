@@ -14,7 +14,7 @@
     <h1 class="page-heading">Edita una imatge</h1>
     <p class="intro">Actualitza les dades de la imatge seleccionada.</p>
     <section class="card form-card">
-      <h2>Calella</h2>
+      <h2><?= $image["title"] ?></h2>
       <form action="index.php?r=image-update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $image["id"] ?>">
         <label for="title">Títol</label><input id="title" name="title" type="text" value="<?= $image["title"] ?>" required>
