@@ -15,6 +15,8 @@
  include "../src/controllers/ctrlImageDelete.php";
  include "../src/controllers/ctrlImageStore.php";
  include "../src/controllers/ctrlImageUpdate.php";
+ include "../src/controllers/ctrlApiImage.php";
+ include "../src/controllers/ctrlHomeAjax.php";
 
  /* models */
  include "../src/Models/Db.php";
@@ -63,9 +65,13 @@
      $response = auth($request, $response, $container, "ctrlImageStore");
  } else if($r == "image-update") {
      $response = auth($request, $response, $container, "ctrlImageUpdate");
- }  else if($r == "about") {
+ }else if($r == "api-image") {
+     $response = ctrlApiImage($request, $response, $container);
+ } else if($r == "about") {
      $response = ctrlAbout($request, $response, $container);
- }  else if($r == "") {
+ }  else if($r == "home-ajax") {
+     $response = ctrlHomeAjax($request, $response, $container);
+ } else if($r == "") {
      $response = ctrlIndex($request, $response, $container);
  }  else {
      echo "No existeix la ruta";
